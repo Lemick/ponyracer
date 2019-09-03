@@ -6,10 +6,12 @@ import { MenuComponent } from './menu/menu.component';
 import { RacesComponent } from './races/races.component';
 import { RaceComponent } from './race/race.component';
 import { PonyComponent } from './pony/pony.component';
+import {HttpClientModule} from '@angular/common/http';
+import { FromNowPipe } from './from-now.pipe';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, RacesComponent, RaceComponent, PonyComponent],
-  imports: [BrowserModule],
+  declarations: [AppComponent, MenuComponent, RacesComponent, RaceComponent, PonyComponent, FromNowPipe],
+  imports: [BrowserModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent]
 })
