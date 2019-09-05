@@ -11,12 +11,12 @@ export class RacesComponent implements OnInit {
 
   races: Array<RaceModel>;
 
-  constructor(raceService: RaceService) {
-    raceService.list().subscribe((fetchedData: Array <RaceModel>) => this.races = fetchedData);
+  constructor(private raceService: RaceService) {
+
   }
 
   ngOnInit() {
-
+    this.raceService.list().subscribe((fetchedData: Array <RaceModel>) => this.races = fetchedData);
   }
 
 }

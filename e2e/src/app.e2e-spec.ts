@@ -8,9 +8,9 @@ describe('ponyracer App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should not display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Ponyracer');
+    expect(page.getTitleText()).toEqual('Ponyracer Always a pleasure to bet on ponies');
   });
 
   afterEach(async () => {

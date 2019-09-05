@@ -3,9 +3,11 @@
     "description": "ponyracer App should display welcome message",
     "assertions": [
       {
-        "passed": true
+        "passed": false,
+        "errorMsg": "Expected 'Ponyracer Always a pleasure to bet on ponies' to be false.",
+        "stackTrace": "Error: Failed expectation\n    at UserContext.<anonymous> (C:\\Users\\Mickael\\OneDrive\\DEV\\ponyracer\\e2e\\src\\app.e2e-spec.ts:13:33)\n    at C:\\Users\\Mickael\\OneDrive\\DEV\\ponyracer\\node_modules\\jasminewd2\\index.js:112:25\n    at new ManagedPromise (C:\\Users\\Mickael\\OneDrive\\DEV\\ponyracer\\node_modules\\selenium-webdriver\\lib\\promise.js:1077:7)\n    at ControlFlow.promise (C:\\Users\\Mickael\\OneDrive\\DEV\\ponyracer\\node_modules\\selenium-webdriver\\lib\\promise.js:2505:12)\n    at schedulerExecute (C:\\Users\\Mickael\\OneDrive\\DEV\\ponyracer\\node_modules\\jasminewd2\\index.js:95:18)\n    at TaskQueue.execute_ (C:\\Users\\Mickael\\OneDrive\\DEV\\ponyracer\\node_modules\\selenium-webdriver\\lib\\promise.js:3084:14)\n    at TaskQueue.executeNext_ (C:\\Users\\Mickael\\OneDrive\\DEV\\ponyracer\\node_modules\\selenium-webdriver\\lib\\promise.js:3067:27)\n    at asyncRun (C:\\Users\\Mickael\\OneDrive\\DEV\\ponyracer\\node_modules\\selenium-webdriver\\lib\\promise.js:2974:25)\n    at C:\\Users\\Mickael\\OneDrive\\DEV\\ponyracer\\node_modules\\selenium-webdriver\\lib\\promise.js:668:7"
       }
     ],
-    "duration": 1783
+    "duration": 1276
   }
 ]
