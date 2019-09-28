@@ -1,4 +1,4 @@
-import {PonyModel} from "./pony.model";
+import {PonyModel} from './pony.model';
 
 export interface  RaceModel {
   id: number;
