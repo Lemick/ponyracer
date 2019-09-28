@@ -6,7 +6,7 @@ import { of, throwError } from 'rxjs';
 
 import { RegisterComponent } from './register.component';
 import { UserService } from '../user.service';
-import { UserModel } from '../models/user-model';
+import { UserModel } from '../models/user.model';
 
 describe('RegisterComponent', () => {
   const fakeUserService = jasmine.createSpyObj<UserService>('UserService', ['register']);

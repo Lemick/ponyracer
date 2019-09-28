@@ -1,0 +1,20 @@
+<h1>Log in</h1>
+<form (ngSubmit)="authenticate()">
+
+</form>
+
+<div *ngIf="this.authenticationFailed" class="alert alert-danger">Nope, try again</div>
+<form (ngSubmit)="authenticate()" #userForm="ngForm">
+  <div class="form-group">
+    <label>Login</label>
+    <input type="text" class="form-control" placeholder="Enter login" name="login" [(ngModel)]="this.credentials.login" ngModel required #login="ngModel"/>
+    <div *ngIf="login.dirty && login.hasError('required')">Login is required</div>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" class="form-control" placeholder="Enter password" name="password" [(ngModel)]="this.credentials.password" ngModel required #password="ngModel"/>
+    <div *ngIf="password.dirty && password.hasError('required')">Login is required</div>
+  </div>
+<button [disabled]="userForm.invalid" type="submit" class="btn btn-primary">Log in</button>
+</form>
+
