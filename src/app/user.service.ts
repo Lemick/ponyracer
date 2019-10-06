@@ -42,4 +42,9 @@ export class UserService {
       this.userEvents.next(JSON.parse(userStored));
     }
   }
+
+  logout() {
+    window.localStorage.removeItem(this.KEY_USER_LOCAL_STORAGE);
+    this.userEvents.next(null);
+  }
 }
