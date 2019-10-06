@@ -9,5 +9,13 @@
         <a class="nav-link" [routerLink]="['/races']">Races</a>
       </li>
     </ul>
+    <div class="nav navbar-nav">
+      <span *ngIf="user" class="nav-item navbar-text mr-2">
+        <span class="nav-item navbar-text mr-2">{{ user.login }}
+          <span class="fa fa-star"></span>
+          {{ user.money }}
+      </span>
+      </span>
+    </div>
   </div>
 </nav>
