@@ -5,16 +5,13 @@
   </button>
   <div id="navbar" class="navbar-collapse" [ngClass]="{'collapse': navbarCollapsed}">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li *ngIf="user" class="nav-item">
         <a class="nav-link" [routerLink]="['/races']">Races</a>
       </li>
     </ul>
     <div class="nav navbar-nav">
       <span *ngIf="user" class="nav-item navbar-text mr-2">
-        <span class="nav-item navbar-text mr-2">{{ user.login }}
-          <span class="fa fa-star"></span>
-          {{ user.money }}
-      </span>
+        <span class="nav-item navbar-text mr-2">{{ user.login }}<span class="fa fa-star"></span>{{ user.money }}</span>
       </span>
     </div>
   </div>
