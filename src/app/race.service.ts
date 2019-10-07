@@ -17,13 +17,16 @@ export class RaceService {
 
   bet(raceId: number, ponyId: number) {
     const url = `${environment.baseUrl}/api/races/${raceId}/bets`;
-    console.log('bet on pony', url);
     return this.httpClient.post<RaceModel>(url, { ponyId });
   }
 
   get(id: number) {
     const url = `${environment.baseUrl}/api/races/${id}`;
-    console.log('call url', url);
     return this.httpClient.get<RaceModel>(url);
+  }
+
+  cancelBet(raceId: number) {
+    const url = `${environment.baseUrl}/api/races/${raceId}/bets`;
+    return this.httpClient.delete(url);
   }
 }

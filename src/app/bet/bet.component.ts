@@ -20,18 +20,22 @@ export class BetComponent implements OnInit {
     this.raceService.get(raceId).subscribe({
       next: value => {
         this.raceModel = value;
-        console.log('race init ', this.raceModel);
       }
     });
-    console.log('race loaded in bet compo', this.raceModel, raceId);
   }
 
   betOnPony(pony: PonyModel) {
-    console.log('bet on pony', pony);
-    this.raceService.bet(this.raceModel.id, pony.id).subscribe({
-      next: race => this.raceModel = race,
-      error: err => this.betFailed = true
-    });
+    if (this.isPonySelected(pony)) {
+      this.raceService.cancelBet(this.raceModel.id).subscribe({
+        next: value => this.raceModel.betPonyId = null,
+        error: err => this.betFailed = true
+      });
+    } else {
+      this.raceService.bet(this.raceModel.id, pony.id).subscribe({
+        next: race => this.raceModel = race,
+        error: err => this.betFailed = true
+      });
+    }
   }
 
   isPonySelected(pony: PonyModel) {
