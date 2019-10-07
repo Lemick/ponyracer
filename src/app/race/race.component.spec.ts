@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 
 import { RaceComponent } from './race.component';
 import { PonyComponent } from '../pony/pony.component';
-import {FromNowPipe} from '../from-now.pipe';
+import { FromNowPipe } from '../from-now.pipe';
 
 describe('RaceComponent', () => {
   beforeEach(() =>

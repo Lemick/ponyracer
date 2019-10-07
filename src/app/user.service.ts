@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {UserModel} from './models/user.model';
-import {BehaviorSubject} from 'rxjs';
-import {tap} from 'rxjs/operators';
-import {environment} from '../environments/environment';
-import {JwtInterceptorService} from './jwt-interceptor.service';
+import { HttpClient } from '@angular/common/http';
+import { UserModel } from './models/user.model';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { environment } from '../environments/environment';
+import { JwtInterceptorService } from './jwt-interceptor.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   readonly KEY_USER_LOCAL_STORAGE = 'rememberMe';
 
   userEvents: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>(undefined);
@@ -24,13 +23,12 @@ export class UserService {
     return this.httpClient.post<UserModel>(url, { login, password, birthYear });
   }
 
-  authenticate(credentials: {login: string, password: string}) {
+  authenticate(credentials: { login: string; password: string }) {
     const url = `${environment.baseUrl}/api/users/authentication`;
 
-    return this.httpClient.post<UserModel>(url, { login: credentials.login, password: credentials.password })
-      .pipe(
-          tap(user => this.storeLoggedInUser(user))
-       );
+    return this.httpClient
+      .post<UserModel>(url, { login: credentials.login, password: credentials.password })
+      .pipe(tap(user => this.storeLoggedInUser(user)));
   }
 
   storeLoggedInUser(user: any) {
