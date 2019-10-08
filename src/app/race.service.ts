@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RaceModel } from './models/race.model';
+import {LiveRaceModel, RaceModel} from './models/race.model';
 import { environment } from '../environments/environment';
-import {interval} from 'rxjs';
-import {map, switchMap, take} from 'rxjs/operators';
-import {PonyWithPositionModel} from './models/pony.model';
+import {WsService} from './ws.service';
+import {Observable} from 'rxjs';
+import {PonyWithPositionModel} from "./models/pony.model";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RaceService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private wsService: WsService) {}
 
   list() {
     const url = `${environment.baseUrl}/api/races`;
@@ -33,21 +34,7 @@ export class RaceService {
     return this.httpClient.delete(url);
   }
 
-  live(raceId: number) {
-    return this.get(raceId).pipe(
-      switchMap(race => {
-        return interval(1000).pipe(take(100), map(position => {
-            return race.ponies.map(pony => {
-              const ponyPosition = {} as PonyWithPositionModel;
-              ponyPosition.position = position;
-              ponyPosition.color = pony.color;
-              ponyPosition.id = pony.id;
-              ponyPosition.name = pony.name;
-              return ponyPosition;
-            });
-          }
-        ));
-      })
-    );
+  live(raceId: number): Observable<Array<PonyWithPositionModel>> {
+    return this.wsService.connect<LiveRaceModel>(`/race/${raceId}`).pipe(map(value => value.ponies));
   }
 }

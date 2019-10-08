@@ -22,8 +22,7 @@ export class LiveComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const raceIdParam = this.activatedRoute.snapshot.paramMap.get('raceId');
     this.raceService.get(+raceIdParam).subscribe({ next: value => this.raceModel = value});
-    this.positionSubscription = this.raceService.live(+raceIdParam).subscribe(
-      {next: poniesWithPosition => this.poniesWithPosition = poniesWithPosition});
+    this.positionSubscription = this.raceService.live(+raceIdParam).subscribe({ next: value => this.poniesWithPosition = value});
   }
 
   ngOnDestroy(): void {
