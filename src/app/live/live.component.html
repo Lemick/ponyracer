@@ -18,7 +18,7 @@
     <div>The race will start {{ raceModel.startInstant | fromNow }}</div>
     <div class="row">
       <div *ngFor="let pony of raceModel.ponies" class="col-sm-2" [class.selected]="pony.id === raceModel.betPonyId">
-        <pr-pony [ponyModel]="pony"></pr-pony>
+        <pr-pony [ponyModel]="pony" [isBoosted]="" (ponyClicked)="onClick($event)"></pr-pony>
       </div>
     </div>
   </div>
