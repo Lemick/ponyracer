@@ -7,7 +7,6 @@ import { PonyModel } from '../models/pony.model';
   styleUrls: ['./pony.component.css']
 })
 export class PonyComponent implements OnInit {
-
   @Input() ponyModel: PonyModel;
   @Input() isRunning: boolean;
   @Input() isBoosted: boolean;
@@ -20,7 +19,7 @@ export class PonyComponent implements OnInit {
 
   getPonyImageUrl() {
     if (this.isBoosted) {
-      return  `assets/images/pony-${this.ponyModel.color.toLowerCase()}-rainbow.gif`;
+      return `assets/images/pony-${this.ponyModel.color.toLowerCase()}-rainbow.gif`;
     } else if (this.isRunning) {
       return `assets/images/pony-${this.ponyModel.color.toLowerCase()}-running.gif`;
     } else {

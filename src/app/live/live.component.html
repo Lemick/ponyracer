@@ -8,7 +8,8 @@
       <div class="alert alert-warning" *ngIf="raceModel.betPonyId && !betWon">You lost your bet.</div>
       <div>Most Valuable Ponies</div>
       <div class="row">
-        <div *ngFor="let winner of winners" class="col-12 col-md-2" [class.selected]="winner.id === raceModel.betPonyId">
+        <div *ngFor="let winner of winners" class="col-12 col-md-2"
+             [class.selected]="winner.id === raceModel.betPonyId">
           <pr-pony [ponyModel]="winner"></pr-pony>
         </div>
       </div>
@@ -27,10 +28,14 @@
       <span class="fa fa-flag" style="font-size: x-large;"></span>
     </div>
     <div style="width: 95%; border-right: 3px dotted lightgray;">
-      <div *ngFor="let pony of poniesWithPosition" class="pony-wrapper" [class.selected]="pony.id === raceModel.betPonyId" [style.marginLeft.%]="pony.position - 5">
-        <pr-pony [ponyModel]="pony" [isRunning]="true"></pr-pony>
+      <div
+        *ngFor="let pony of poniesWithPosition; trackBy: ponyById"
+        class="pony-wrapper"
+        [class.selected]="pony.id === raceModel.betPonyId"
+        [style.marginLeft.%]="pony.position - 5"
+      >
+        <pr-pony [ponyModel]="pony" [isRunning]="true" [isBoosted]="pony.boosted" (ponyClicked)="onClick(pony)"></pr-pony>
       </div>
     </div>
   </div>
 </div>
-
