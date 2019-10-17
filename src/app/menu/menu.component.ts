@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserModel } from '../models/user.model';
 import { UserService } from '../user.service';
-import { Subscription } from 'rxjs';
+import {EMPTY, of, Subscription} from 'rxjs';
 import { Router } from '@angular/router';
+import {catchError, concat, switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'pr-menu',
@@ -17,7 +18,12 @@ export class MenuComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
-    this.userEventsSubscription = this.userService.userEvents.subscribe(value => (this.user = value));
+
+    this.userEventsSubscription = this.userService.userEvents
+      .pipe(
+        tap(x => console.log(x)),
+        switchMap(user => (user ? concat(of(user), this.userService.scoreUpdates(user.id).pipe(catchError(() => EMPTY))) : of(null))))
+      .subscribe(userWithScore => (this.user = userWithScore));
   }
 
   ngOnDestroy(): void {

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserModel } from './models/user.model';
-import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { JwtInterceptorService } from './jwt-interceptor.service';
+import {WsService} from './ws.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
 
   userEvents: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>(undefined);
 
-  constructor(private httpClient: HttpClient, private jwtInterceptor: JwtInterceptorService) {
+  constructor(private httpClient: HttpClient, private jwtInterceptor: JwtInterceptorService, private wsService: WsService) {
     this.retrieveUser();
   }
 
@@ -50,5 +51,9 @@ export class UserService {
     window.localStorage.removeItem(this.KEY_USER_LOCAL_STORAGE);
     this.userEvents.next(null);
     this.jwtInterceptor.removeJwtToken();
+  }
+
+  scoreUpdates(userId: number): Observable<UserModel> {
+    return this.wsService.connect<UserModel>(`/player/${userId}`);
   }
 }
