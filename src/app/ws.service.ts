@@ -11,10 +11,9 @@ export class WsService {
   constructor(@Inject(WEBSOCKET) private WebSocket: Type<WebSocket>, @Inject(WEBSTOMP) private Webstomp: any) {}
 
   connect<T>(channel: string): Observable<T> {
-    return new Observable<T>((observer: Observer<T>) => {
+    return new Observable((observer: Observer<T>) => {
       const connection: WebSocket = new this.WebSocket(`${environment.wsBaseUrl}/ws`);
-      const stompClient: Client = (this.Webstomp.Client = this.Webstomp.over(connection));
-
+      const stompClient: Client = this.Webstomp.over(connection);
       let subscription: Subscription;
       stompClient.connect(
         { login: null, passcode: null },
@@ -24,12 +23,8 @@ export class WsService {
             observer.next(bodyAsJson);
           });
         },
-        error => {
-          // propagate the error
-          observer.error(error);
-        }
+        error => observer.error(error)
       );
-
       return () => {
         if (subscription) {
           subscription.unsubscribe();
